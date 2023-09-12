@@ -12,8 +12,8 @@ const gatherStatsForUser = async () => {
     // Get the list of all repositories for the user, including private ones
     const { data } = await octokit.repos.listForAuthenticatedUser();
     console.log(`Raw repo details = ${data}`);
-    const repositoryDetails = data.map(repo => { name: repo.name, owner: repo.owner.login });
-    console.log(`repository details = ${repositoryDetails}`);
+    //const repositoryDetails = data.map(repo => { name: repo.name, owner: repo.owner.login });
+    //console.log(`repository details = ${repositoryDetails}`);
     
     const allRepos = data;
     let count = repoCount = 0;
