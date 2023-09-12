@@ -1,7 +1,7 @@
 // Check GitHub Accss Token
 const accessToken = process.env.ACCESS_TOKEN;
-if (accessToken) console.log(`GitHub access token = ${accessToken}\n`);
-else console.error("GitHub access token is not defined.");
+console.log(`GitHub access token = ${accessToken}\n`);
+if(!accessToken) console.error("GitHub access token is not defined.");
 
 // Configure OctoKit
 const { Octokit } = require('@octokit/rest');
