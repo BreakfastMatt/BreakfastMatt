@@ -14,7 +14,6 @@ async function gatherStatsForUser() {
     const { data: allRepos } = await octokit.repos.listForAuthenticatedUser(config);
     
     // Gather some basic repository statistics
-    const allRepos = await getRepositoriesAsync();
     let count = repoCount = 0;
     for (const repo of allRepos) {
       const repoName = repo.name;
