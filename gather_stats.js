@@ -6,6 +6,21 @@ if (!accessToken) console.log(`GitHub access token is not defined.`);
 const { Octokit } = require('@octokit/rest');
 const octokit = new Octokit({ auth: accessToken });
 
+// Fetch various repository statistics for the specified user
+const gatherStatsForUser = async () => {
+  try {
+    // Get the repository details for the user (public & private)
+    const repositoryDetails = await fetchRepositoryDetails();
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+gatherStatsForUser().catch((error) => {
+  console.error('Error:', error);
+  process.exit(1);
+});
+
 // Get the list of all repositories for the user, including private ones
 const fetchRepositoryDetails = async () => {
     // Get the list of all repositories for the user, including private ones
@@ -20,27 +35,11 @@ const fetchRepositoryDetails = async () => {
 
     // Wait for all promises to resolve
     const repositoryDetails = await Promise.all(repoStatsPromises);
-    return repositoryDetails;
-};
-
-
-// Fetch various repository statistics for the specified user
-const gatherStatsForUser = async () => {
-  try {
-    // Get the repository details for the user (public & private)
-    const repositoryDetails = await fetchRepositoryDetails();
-
+    
     // Log repository details
     logRepositoryBasicDetails(repositoryDetails);
-  } catch (error) {
-    console.error('Error:', error);
-  }
+    return repositoryDetails;
 };
-
-gatherStatsForUser().catch((error) => {
-  console.error('Error:', error);
-  process.exit(1);
-});
 
 // Log basic repository details (name, total count etc.)
 const logRepositoryBasicDetails = (repositoryDetails) => {
