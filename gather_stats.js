@@ -5,6 +5,7 @@ const username = 'BreakfastMatt';
 async function gatherStatsForUser() {
   try {
     // Get the list of all repositories for the user, including private ones
+    console.log(`GitHub access token = ${process.env.GITHUB_TOKEN}\n`);
     const { data: allRepos } = await octokit.repos.listForUser({ username, type: 'all' });
 
     // Gather some basic repository statistics
