@@ -16,7 +16,7 @@ const collateStatisticsForUser = (name, repository) => {
     if (!userRepoStatistics?.weeks) return { commits: 0, codeAdded: 0, codeDeleted: 0 }
     
     // Calculate the statistics
-    userRepoStatistics.forEach(week => {
+    userRepoStatistics.weeks.forEach(week => {
         // Gather totals
         statistics.commits += week.c;
         statistics.codeAdded += week.a;
