@@ -6,33 +6,12 @@ if (!accessToken) console.log(`GitHub access token is not defined.`);
 const { Octokit } = require('@octokit/rest');
 const octokit = new Octokit({ auth: accessToken });
 
-// Get the list of all repositories for the user, including private ones
-const fetchRepositoryDetails = async () => {
-    // Get the list of all repositories for the user, including private ones
-    const { data: allRepos } = await octokit.repos.listForAuthenticatedUser();
-
-    // Fetch the repository-level statistics
-    const repoStatsPromises = allRepos.map(async (repo) => {
-      const { data: repoStats } = await octokit.repos.getContributorsStats({ owner: repo.owner.login, repo: repo.name });
-      const mappedRepoDetail = { name: repo.name, owner: repo.owner.login, statistics: repoStats };
-      return mappedRepoDetail;
-    });
-    const repositoryDetails = await Promise.all(repoStatsPromises);
-    
-    // Log repository details
-    console.log("\nRepositories:");
-    repositoryDetails.forEach(repo => console.log(`* ${repo.name}`));
-    console.log(`Total repositories = ${repositoryDetails.length}\n`);
-    return repositoryDetails;
-};
-
-
 // Collect all of the repository-level statics for the user
-const collateStatisticsForUser = (repositoryDetails) => {
+const collateStatisticsForUser = (repoStats) => {
     // Calculate the statistics
-    const totalCommits = repositoryDetails.statistics.reduce((total, contributor) => total + contributor.total, 0);
-    const codeAdded = repositoryDetails.statistics.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.a, 0), 0);
-    const codeDeleted = repositoryDetails.statistics.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.d, 0), 0);
+    const totalCommits = repoStats.reduce((total, contributor) => total + contributor.total, 0);
+    const codeAdded = repoStats.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.a, 0), 0);
+    const codeDeleted = repoStats.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.d, 0), 0);
 
     // Log & return mapped statistics
     const statistics = { commits: totalCommits, codeAdded, codeDeleted };
@@ -41,6 +20,27 @@ const collateStatisticsForUser = (repositoryDetails) => {
     console.log(`Code Deleted = ${codeDeleted}`);
     return statistics;
 }
+
+// Get the list of all repositories for the user, including private ones
+const fetchRepositoryDetails = async () => {
+    // Get the list of all repositories for the user, including private ones
+    const { data: allRepos } = await octokit.repos.listForAuthenticatedUser();
+
+    // Fetch the repository-level statistics
+    const repoStatsPromises = allRepos.map(async (repo) => {
+      const { data: repoStats } = await octokit.repos.getContributorsStats({ owner: repo.owner.login, repo: repo.name });
+      const statistics = collateStatisticsForUser(repoStats);
+      const mappedRepoDetail = { name: repo.name, owner: repo.owner.login, statistics };
+      return mappedRepoDetail;
+    });
+    const repositoryDetails = await Promise.all(repoStatsPromises);
+    
+    // Log repository details
+    console.log("\nRepositories:");
+    repositoryDetails.forEach(repo => console.log(`* ${repo.name} [commits = ${repo.statistics.commits}, codeAdded = ${repo.statistics.codeAdded}, codeDeleted = ${repo.statistics.codeDeleted}]`));
+    console.log(`Total repositories = ${repositoryDetails.length}\n`);
+    return repositoryDetails;
+};
 
 // Fetch various repository statistics for the specified user
 const gatherStatsForUser = async () => {
