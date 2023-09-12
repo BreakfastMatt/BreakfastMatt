@@ -24,7 +24,7 @@ const collateStatisticsForUser = (name, repository) => {
         statistics.codeDeleted += week.d;
     });
     return statistics;
-}
+};
 
 // Get the list of all repositories for the user, including private ones
 const fetchRepositoryDetails = async () => {
@@ -43,8 +43,18 @@ const fetchRepositoryDetails = async () => {
     // Log repository details
     console.log("Repositories:");
     repositoryDetails.forEach(repo => console.log(`* ${repo.name} [commits = ${repo.statistics.commits}, codeAdded = ${repo.statistics.codeAdded}, codeDeleted = ${repo.statistics.codeDeleted}]`));
-    console.log(`Total repositories = ${repositoryDetails.length}\n`);
+    console.log(`Total repositories = ${repositoryDetails.length}`);
     return repositoryDetails;
+};
+
+// Calculate the total user statistics across all the repositories
+const collateFinalUserStatistics = (repositoryDetails) => {
+    const totalCommits = repositoryDetail.reduce((total, repo) => total + repo.totalCommits, 0);
+    const codeAdded = repositoryDetail.reduce((total, repo) => total + repo.codeAdded, 0);
+    const codeDeleted = repositoryDetail.reduce((total, repo) => total + repo.codeDeleted, 0);
+    const userStats = { totalCommits, codeAdded, codeDeleted };
+    console.log("\nUser statistics:", userStats);
+    return userStats;
 };
 
 // Fetch various repository statistics for the specified user
@@ -52,6 +62,7 @@ const gatherStatsForUser = async () => {
   try {
     // Get the repository details for the user (public & private)
     const repositoryDetails = await fetchRepositoryDetails();
+    const userStatistics = collateFinalUserStatistics(repositoryDetails);
   } catch (error) {
     console.error('Error:', error);
   }
