@@ -76,7 +76,7 @@ Lines Deleted: ${userStats.codeDeleted}
     const { data: fileData } = await octokit.repos.getContent({ owner: username, repo: username,  path: filePath });
 
     // Update the README.md file with the new content
-    await octokit.repos.createOrUpdateFile({ owner: username, repo: username, path: filePath, message: 'Update README.md with stats',content: contentBase64,sha: fileData.sha });
+    await octokit.repos.createOrUpdateFileContents({ owner: username, repo: username, path: filePath, message: 'Update README.md with stats',content: contentBase64,sha: fileData.sha });
     console.log('README.md updated successfully.');
   } catch (error) {
     console.error('Error:', error);
