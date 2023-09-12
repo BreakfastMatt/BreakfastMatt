@@ -2,7 +2,7 @@ const { Octokit } = require('@octokit/rest');
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
 async function gatherStatsForUser() {
-  const username = 'YourGitHubUsername'; // Replace with your GitHub username
+  const username = 'BreakfastMatt'; // Replace with your GitHub username
 
   try {
     // Get the list of all repositories for the user, including private ones
