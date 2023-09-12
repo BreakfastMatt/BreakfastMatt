@@ -49,7 +49,7 @@ const fetchRepositoryDetails = async () => {
 
 // Calculate the total user statistics across all the repositories
 const collateFinalUserStatistics = (repositoryDetails) => {
-    const totalCommits = repositoryDetails.reduce((total, repo) => total + repo.statistics.totalCommits, 0);
+    const totalCommits = repositoryDetails.reduce((total, repo) => total + repo.statistics.commits, 0);
     const codeAdded = repositoryDetails.reduce((total, repo) => total + repo.statistics.codeAdded, 0);
     const codeDeleted = repositoryDetails.reduce((total, repo) => total + repo.statistics.codeDeleted, 0);
     const userStats = { totalCommits, codeAdded, codeDeleted };
