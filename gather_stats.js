@@ -9,17 +9,18 @@ const username = "BreakfastMatt";
 
 // Collect all of the repository-level statics for the user
 const collateStatisticsForUser = (name, repository) => {
-    // Calculate the statistics
+    // Get user statistics for the repository
     const userRepoStatistics = repository.find((stats) => stats.author.login === username);
-    //console.log (`Repository stats for ${name}`, userRepoStatistics);
-    console.log (`Repository stats for ${name}`, userRepoStatistics.weeks);
+    console.log (`Repository stats for ${name}`, userRepoStatistics);
+    if (!userRepoStatistics?.weeks) return { commits: 0, codeAdded: 0, codeDeleted: 0 }
+    
+    // Calculate the statistics
     const totalCommits = userRepoStatistics.weeks.reduce((total, contributor) => total + contributor.c, 0);
-    //const codeAdded = userRepoStatistics.weeks.reduce((total, contributor) => total + contributor.a, 0);
-    //const codeDeleted = userRepoStatistics.weeks.reduce((total, contributor) => total + contributor.d, 0);
+    const codeAdded = userRepoStatistics.weeks.reduce((total, contributor) => total + contributor.a, 0);
+    const codeDeleted = userRepoStatistics.weeks.reduce((total, contributor) => total + contributor.d, 0);
 
     // Log & return mapped statistics
-    const statistics = { commits: 0, codeAdded: 0, codeDeleted: 0 };
-    //const statistics = { commits: totalCommits, codeAdded, codeDeleted };
+    const statistics = { commits: totalCommits, codeAdded, codeDeleted };
     return statistics;
 }
 
