@@ -9,8 +9,7 @@ const octokit = new Octokit({ auth: accessToken });
 // Collect all of the repository-level statics for the user
 const collateStatisticsForUser = (repository) => {
     // Calculate the statistics
-    console.log(`RepoStats = ${repository.total}`)
-    const totalCommits = repository.reduce((total, contributor) => total + contributor.total, 0);
+    const totalCommits = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.c, 0), 0);
     const codeAdded = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.a, 0), 0);
     const codeDeleted = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.d, 0), 0);
 
