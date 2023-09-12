@@ -11,7 +11,7 @@ const username = "BreakfastMatt";
 const collateStatisticsForUser = (name, repository) => {
     // Get user statistics for the repository
     const userRepoStatistics = repository.find((stats) => stats.author.login === username);
-    console.log (`Repository stats for ${name}`, userRepoStatistics);
+    //console.log (`Repository stats for ${name}`, userRepoStatistics);
     if (!userRepoStatistics?.weeks) return { commits: 0, codeAdded: 0, codeDeleted: 0 }
     
     // Calculate the statistics
@@ -50,7 +50,6 @@ const gatherStatsForUser = async () => {
   try {
     // Get the repository details for the user (public & private)
     const repositoryDetails = await fetchRepositoryDetails();
-    const userStatistics = collateStatisticsForUser(repositoryDetails);
   } catch (error) {
     console.error('Error:', error);
   }
