@@ -26,11 +26,28 @@ const fetchRepositoryDetails = async () => {
     return repositoryDetails;
 };
 
+
+// Collect all of the repository-level statics for the user
+const collateStatisticsForUser = (repositoryDetails) => {
+    // Calculate the statistics
+    const totalCommits = repositoryDetails.statistics.reduce((total, contributor) => total + contributor.total, 0);
+    const codeAdded = repositoryDetails.statistics.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.a, 0), 0);
+    const codeDeleted = repositoryDetails.statistics.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.d, 0), 0);
+
+    // Log & return mapped statistics
+    const statistics = { commits: totalCommits, codeAdded, codeDeleted };
+    console.log(`Total commits = ${totalCommits}`);
+    console.log(`Code Added = ${codeAdded}`);
+    console.log(`Code Deleted = ${codeDeleted}`);
+    return statistics;
+}
+
 // Fetch various repository statistics for the specified user
 const gatherStatsForUser = async () => {
   try {
     // Get the repository details for the user (public & private)
     const repositoryDetails = await fetchRepositoryDetails();
+    const userStatistics = collateStatisticsForUser(repositoryDetails);
   } catch (error) {
     console.error('Error:', error);
   }
