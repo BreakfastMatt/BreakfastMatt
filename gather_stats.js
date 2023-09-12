@@ -7,12 +7,12 @@ const { Octokit } = require('@octokit/rest');
 const octokit = new Octokit({ auth: accessToken });
 
 // Collect all of the repository-level statics for the user
-const collateStatisticsForUser = (repoStats) => {
+const collateStatisticsForUser = (repository) => {
     // Calculate the statistics
-    console.log(`RepoStats = ${repoStats}`)
-    const totalCommits = repoStats.reduce((total, contributor) => total + contributor.total, 0);
-    const codeAdded = repoStats.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.a, 0), 0);
-    const codeDeleted = repoStats.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.d, 0), 0);
+    console.log(`RepoStats = ${repository.total}`)
+    const totalCommits = repository.reduce((total, contributor) => total + contributor.total, 0);
+    const codeAdded = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.a, 0), 0);
+    const codeDeleted = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.d, 0), 0);
 
     // Log & return mapped statistics
     const statistics = { commits: totalCommits, codeAdded, codeDeleted };
