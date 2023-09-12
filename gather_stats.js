@@ -7,7 +7,7 @@ const { Octokit } = require('@octokit/rest');
 const octokit = new Octokit({ auth: accessToken });
 
 // Collect all of the repository-level statics for the user
-const collateStatisticsForUser = (repository) => {
+const collateStatisticsForUser = (name, repository) => {
     // Calculate the statistics
     console.log ("Repository stats");
     console.log(repository);
@@ -28,7 +28,7 @@ const fetchRepositoryDetails = async () => {
     // Fetch the repository-level statistics
     const repoStatsPromises = allRepos.map(async (repo) => {
       const { data: repoStats } = await octokit.repos.getContributorsStats({ owner: repo.owner.login, repo: repo.name });
-      const statistics = collateStatisticsForUser(repoStats);
+      const statistics = collateStatisticsForUser(repo.name, repoStats);
       const mappedRepoDetail = { name: repo.name, owner: repo.owner.login, statistics };
       return mappedRepoDetail;
     });
