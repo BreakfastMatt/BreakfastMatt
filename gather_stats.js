@@ -1,11 +1,15 @@
+// Configure OctoKit
 const { Octokit } = require('@octokit/rest');
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+const accessToken = process.env.ACCESS_TOKEN;
+console.log(`GitHub access token = ${accessToken}\n`);
+const octokit = new Octokit({ auth: accessToken });
 const username = 'BreakfastMatt';
 
 async function gatherStatsForUser() {
   try {
     // Get the list of all repositories for the user, including private ones
-    console.log(`GitHub access token = ${process.env.GITHUB_TOKEN}\n`);
+    
+    
     const { data: allRepos } = await octokit.repos.listForUser({ username, type: 'all' });
 
     // Gather some basic repository statistics
