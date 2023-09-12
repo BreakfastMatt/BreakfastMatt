@@ -28,7 +28,8 @@ const fetchRepositoryDetails = async () => {
 
     // Fetch the repository-level statistics
     const repoStatsPromises = allRepos.map(async (repo) => {
-      const { data: repoStats } = await octokit.repos.getContributorsStats({ owner: repo.owner.login, repo: repo.name });
+      //const { data: repoStats } = await octokit.repos.getContributorsStats({ owner: repo.owner.login, repo: repo.name });
+      const { data: repoStats } = await octokit.repos.getContributorsStats({ owner: "BreakfastMatt", repo: repo.name });
       const statistics = collateStatisticsForUser(repo.name, repoStats);
       const mappedRepoDetail = { name: repo.name, owner: repo.owner.login, statistics };
       return mappedRepoDetail;
