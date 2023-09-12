@@ -15,7 +15,6 @@ const gatherStatsForUser = async () => {
 
     // Log repository details
     logRepositoryBasicDetails(repositoryDetails);
-    console.log('Statistics gathered for all repositories.');
   } catch (error) {
     console.error('Error:', error);
   }
@@ -30,5 +29,5 @@ gatherStatsForUser().catch((error) => {
 const logRepositoryBasicDetails = (repositoryDetails) => {
   console.log("\nRepositories:");
   repositoryDetails.forEach(repo => console.log(`* ${repo.name}`));
-  console.log(`Total repositories = ${repositoryDetails.length}`);
+  console.log(`Total repositories = ${repositoryDetails.length}\n`);
 }
