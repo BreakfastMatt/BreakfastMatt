@@ -17,7 +17,7 @@ const collateStatisticsForUser = (name, repository) => {
     //const codeDeleted = userRepoStatistics.weeks.reduce((total, contributor) => total + contributor.d, 0);
 
     // Log & return mapped statistics
-    const statistics = { commits: 0, 0, 0 };
+    const statistics = { commits: 0, codeAdded: 0, codeDeleted: 0 };
     //const statistics = { commits: totalCommits, codeAdded, codeDeleted };
     return statistics;
 }
