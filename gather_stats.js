@@ -11,8 +11,9 @@ const username = "BreakfastMatt";
 const collateStatisticsForUser = (name, repository) => {
     // Calculate the statistics
     const userRepoStatistics = repository.find((stats) => stats.author.login === username);
-    console.log (`Repository stats for ${name}`, userRepoStatistics);
-    //const totalCommits = userRepoStatistics.weeks.reduce((total, contributor) => total + contributor.c, 0);
+    //console.log (`Repository stats for ${name}`, userRepoStatistics);
+    console.log (`Repository stats for ${name}`, userRepoStatistics.weeks);
+    const totalCommits = userRepoStatistics.weeks.reduce((total, contributor) => total + contributor.c, 0);
     //const codeAdded = userRepoStatistics.weeks.reduce((total, contributor) => total + contributor.a, 0);
     //const codeDeleted = userRepoStatistics.weeks.reduce((total, contributor) => total + contributor.d, 0);
 
