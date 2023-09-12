@@ -62,7 +62,7 @@ async function updateReadmeFileWithLatestStats(userStats) {
   try {
     // Construct the new content for the README.md file
     const readmeContent = `
-# My GitHub Stats
+# My GitHub Stats (generated using a custom GitHub action - likely inaccurate still)
 
 Total Commits: ${userStats.totalCommits}
 
