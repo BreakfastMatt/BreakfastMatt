@@ -11,7 +11,7 @@ const username = "BreakfastMatt";
 const collateStatisticsForUser = (name, repository) => {
     // Get user statistics for the repository
     const statistics = { commits: 0, codeAdded: 0, codeDeleted: 0 };
-    const userRepoStatistics = repository?.find((stats) => stats.author.login === username);
+    const userRepoStatistics = repository ? repository.find((stats) => stats.author.login === username) : null;
     //console.log (`Repository stats for ${name}`, userRepoStatistics);
     if (!userRepoStatistics?.weeks) return { commits: 0, codeAdded: 0, codeDeleted: 0 }
     
