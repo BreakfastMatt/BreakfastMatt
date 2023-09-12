@@ -1,5 +1,9 @@
-name: Gather Repository Stats
+name: Gather Repository Stats and Test Workflow
+
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 0 * * *'  # Run daily at midnight UTC
 
@@ -22,4 +26,14 @@ jobs:
       - name: Gather Repository Stats
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: node gather_stats.js
+        run: node gather_stats.js  # Replace with your script
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Run Test Script
+        run: node test_script.js
