@@ -65,7 +65,9 @@ async function updateReadmeFileWithLatestStats(userStats) {
 # My GitHub Stats
 
 Total Commits: ${userStats.totalCommits}
+
 Lines Added: ${userStats.codeAdded}
+
 Lines Deleted: ${userStats.codeDeleted}
     `;
 
@@ -77,7 +79,7 @@ Lines Deleted: ${userStats.codeDeleted}
 
     // Update the README.md file with the new content
     await octokit.repos.createOrUpdateFileContents({ owner: username, repo: username, path: filePath, message: 'Update README.md with stats',content: contentBase64,sha: fileData.sha });
-    console.log('README.md updated successfully.');
+    console.log("\nREADME.md updated successfully.");
   } catch (error) {
     console.error('Error:', error);
   }
