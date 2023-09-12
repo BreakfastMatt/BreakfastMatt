@@ -11,11 +11,10 @@ const username = 'BreakfastMatt';
 async function gatherStatsForUser() {
   try {
     // Get the list of all repositories for the user, including private ones    
-    //const config = { affiliation: [ "owner", "collaborator", "organization_member" ] };
-    const config = { affiliation: [ "organization_member" ] };
     const { data: allRepos } = await octokit.repos.listForAuthenticatedUser(config);
-
+    
     // Gather some basic repository statistics
+    const allRepos = await getRepositoriesAsync();
     let count = repoCount = 0;
     for (const repo of allRepos) {
       const repoName = repo.name;
