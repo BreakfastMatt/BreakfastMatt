@@ -1,0 +1,3 @@
+"dependencies": {
+  "@octokit/rest": "18.12.0",
+}
