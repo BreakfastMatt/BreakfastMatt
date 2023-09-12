@@ -10,17 +10,22 @@ const octokit = new Octokit({ auth: accessToken });
 const gatherStatsForUser = async () => {
   try {
     // Get the list of all repositories for the user, including private ones
-    const { data: allRepos } = await octokit.repos.listForAuthenticatedUser();
-
-    // Gather some basic repository statistics
+    const { data } = await octokit.repos.listForAuthenticatedUser();
+    const repositoryDetails = data.map(repo => { name: repo.name, owner: repo.owner.login });
+    console.log(`repository details = ${repositoryDetails}`);
+    
+    const allRepos = data;
     let count = repoCount = 0;
     for (const repo of allRepos) {
+      const owner = repo.owner.login;
       const repoName = repo.name;
       console.log(`* ${repoName}`);
       repoCount++;
+
+      
     }
     console.log(`\nTotal repositories = ${repoCount}`);
-    console.log('Statistics gathered for all repositories.\n');
+    console.log('Statistics gathered for all repositories.');
   } catch (error) {
     console.error('Error:', error);
   }
