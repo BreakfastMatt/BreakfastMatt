@@ -29,6 +29,6 @@ gatherStatsForUser().catch((error) => {
 // Log basic repository details (name, total count etc.)
 const logRepositoryBasicDetails = (repositoryDetails) => {
   console.log("\nRepositories:");
-  repositoryDetails.forEach(repoDetail => console.log(`* ${repoDetail.name}`);
+  repositoryDetails.forEach({name} => console.log(`* ${name}`));
   console.log(`Total repositories = ${repositoryDetails.length}`);
 }
