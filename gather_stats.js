@@ -5,12 +5,14 @@ if (!accessToken) console.log(`GitHub access token is not defined.`);
 // Configure OctoKit
 const { Octokit } = require('@octokit/rest');
 const octokit = new Octokit({ auth: accessToken });
+const username = "BreakfastMatt";
 
 // Collect all of the repository-level statics for the user
 const collateStatisticsForUser = (name, repository) => {
     // Calculate the statistics
     console.log (`Repository stats for ${name}`);
-    console.log(repository[0]);
+    const userStatistics = repository.find((stats) => stats.author.login === username);
+    console.log(userStatistics);
     //const totalCommits = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.c, 0), 0);
     //const codeAdded = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.a, 0), 0);
     //const codeDeleted = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.d, 0), 0);
