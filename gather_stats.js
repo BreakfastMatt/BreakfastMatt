@@ -7,19 +7,15 @@ async function gatherStatsForUser() {
     // Get the list of all repositories for the user, including private ones
     const { data: allRepos } = await octokit.repos.listForUser({ username });
 
+    // Gather some basic repository statistics
+    let count = repoCount = 0;
     for (const repo of allRepos) {
       const repoName = repo.name;
-      const owner = repo.owner.login;
-      const repoDescription = repo.description || 'No description available';
-
-      console.log(`Repository: ${owner}/${repoName}`);
-      console.log(`Description: ${repoDescription}`);
-      console.log(`Stars: ${repo.stargazers_count}`);
-      console.log(`Forks: ${repo.forks_count}`);
-      console.log('\n');
+      console.log(`* ${repoName}`);
+      repoCount++;
     }
-
-    console.log('Statistics gathered for all repositories.');
+    console.log(`\nTotal repositories = ${repoCount}`);
+    console.log('Statistics gathered for all repositories.\n');
   } catch (error) {
     console.error('Error:', error);
   }
