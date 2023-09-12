@@ -10,9 +10,11 @@ const username = "BreakfastMatt";
 // Collect all of the repository-level statics for the user
 const collateStatisticsForUser = (name, repository) => {
     // Calculate the statistics
+    const userRepoStatistics = repository.find((stats) => stats.author.login === username);
     console.log (`Repository stats for ${name}`);
-    const userStatistics = repository.find((stats) => stats.author.login === username);
-    console.log(userStatistics);
+    console.log(userRepoStatistics);
+
+    // TODO: add repo tracking logic here! :D
     //const totalCommits = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.c, 0), 0);
     //const codeAdded = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.a, 0), 0);
     //const codeDeleted = repository.reduce((total, contributor) => total + contributor.weeks.reduce((weekTotal, week) => weekTotal + week.d, 0), 0);
