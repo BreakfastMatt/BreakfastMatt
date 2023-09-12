@@ -1,18 +1,17 @@
-// Check GitHub Accss Token
+// Check GitHub Access Token
 const accessToken = process.env.ACCESS_TOKEN;
 if (!accessToken) console.log(`GitHub access token is not defined.`);
 
 // Configure OctoKit
 const { Octokit } = require('@octokit/rest');
 const octokit = new Octokit({ auth: accessToken });
-const username = 'BreakfastMatt';
 
 // Fetch various repository statistics for the specified user
-async function gatherStatsForUser() {
+const gatherStatsForUser = async () => {
   try {
-    // Get the list of all repositories for the user, including private ones    
+    // Get the list of all repositories for the user, including private ones
     const { data: allRepos } = await octokit.repos.listForAuthenticatedUser();
-    
+
     // Gather some basic repository statistics
     let count = repoCount = 0;
     for (const repo of allRepos) {
@@ -25,7 +24,7 @@ async function gatherStatsForUser() {
   } catch (error) {
     console.error('Error:', error);
   }
-}
+};
 
 gatherStatsForUser().catch((error) => {
   console.error('Error:', error);
