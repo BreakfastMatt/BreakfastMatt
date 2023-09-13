@@ -1,9 +1,9 @@
 
 # My GitHub Stats (generated using a custom GitHub action - likely inaccurate still)
 
-Total Commits: 154
+Total Commits: 73
 
-Lines Added: 29611
+Lines Added: 12078
 
-Lines Deleted: 1895
+Lines Deleted: 1537
     
