@@ -1,1 +1,1 @@
-export const accessToken = 'your-local-access-token';
+export const localAccessToken = 'your-local-access-token';
