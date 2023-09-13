@@ -17,8 +17,8 @@ const gatherStatsForUserAsync = async () => {
     const repositoryList = await fetchUserRepositoriesAsync(accessToken);
 
     // Fetch the repository statistics
-    // const repositoryStatistics = await fetchRepositoryStatisticsAsync(accessToken, repositoryList);
-
+    const username = "BreakfastMatt";
+    const repositoryStatistics = await fetchRepositoryStatisticsAsync(accessToken, username, repositoryList);
 
     // const repositoryDetails = await fetchRepositoryDetails();
     // const userStatistics = collateFinalUserStatistics(repositoryDetails);

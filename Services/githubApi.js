@@ -1,6 +1,6 @@
 // Imports
 import { Octokit } from '@octokit/rest';
-import log from './log.js';
+import { log } from './log.js';
 
 /**
  * Configure the octokit instance to call GitHub's API
@@ -25,17 +25,18 @@ export const fetchUserRepositoriesAsync = async (accessToken) => {
 
     // Map and return the list of repositories
     const repositoryList = allRepos.map(repo => ({ name: repo.name, owner: repo.owner.login }));
-    log(repositoryList, `Number of repositories = ${repositoryList.length}`);
+    //log(repositoryList, `Number of repositories = ${repositoryList.length}`);
     return repositoryList;
 };
 
-export const fetchRepositoryStatisticsAsync = async (accessToken, repositoryList) => {
-    const tasks = [];
+export const fetchRepositoryStatisticsAsync = async (accessToken, username, repositoryList) => {
     const octokit = getOctokit(accessToken);
-    repositoryList.forEach(repository => {
-        const { data: repoStats } = octokit.repos.getContributorsStats({ repo: repository.name, owner: repository.owner });
-        tasks.push(repoStats);
+    const tasks = repositoryList.map(async (repository) => {
+        log(repository.name)
+        // TODO: the getContributorsStats call seems to sometimes fail, need to find out how to deal with this
+        const { data: repoStats } = await octokit.repos.getContributorsStats({ owner: repository.owner, repo: repository.name });
+        const { total, weeks } = repoStats.find(repo => repo.author.login === username);
+        return repoStats;
     });
     const taskResponses = await Promise.all(tasks);
-    log(taskResponses);
 };
