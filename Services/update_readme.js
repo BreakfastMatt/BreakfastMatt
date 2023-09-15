@@ -5,6 +5,7 @@ import { readFileContents } from "./readmeStats.js";
 
 const pushReadMeUpdates = async () => {
     // Set up octokit and baseRequest
+    console.log("Started")
     const accessToken = getAccessToken();
     const username = "BreakfastMatt";
     const octokit = getOctokit(accessToken);
@@ -26,4 +27,11 @@ const pushReadMeUpdates = async () => {
         sha: currentFileContentBase64.sha, // Current file sha
         content: updatedFileContentBase64, // Updated file contents
     });
+    console.log("Readme file updated", status);
 };
+
+// Run and handle errors
+pushReadMeUpdates().catch((error) => {
+    console.error("Error:", error);
+    process.exit(1);
+});

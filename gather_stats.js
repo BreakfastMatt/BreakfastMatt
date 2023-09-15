@@ -36,7 +36,7 @@ const gatherStatsForUserAsync = async () => {
   }
 };
 
-// Handle Errors
+// Run and handle errors
 gatherStatsForUserAsync().catch((error) => {
   console.error("Error:", error);
   process.exit(1);
