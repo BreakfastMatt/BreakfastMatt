@@ -32,4 +32,7 @@ jobs:
           git config user.email 'action@github.com'
           git add README.md
           git commit -m 'Update README with data'
-          git push
+          git remote add origin_with_token https://$GH_PAT@github.com/BreakfastMatt/BreakfastMatt.git
+          git push --set-upstream origin_with_token main
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
