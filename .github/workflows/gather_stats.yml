@@ -1,4 +1,4 @@
-name: Gather Repository Stats and Test Workflow
+name: Gather Repository Stats and Update README file
 
 on:
   workflow_dispatch: # This is the manual invocation event
