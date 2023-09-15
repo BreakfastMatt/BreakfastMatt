@@ -1,7 +1,7 @@
 // Imports
-import getAccessToken from "./getAccessToken";
-import { getOctokit } from "./githubApi";
-import { readFileContents } from "./readmeStats";
+import getAccessToken from "./getAccessToken.js";
+import { getOctokit } from "./githubApi.js";
+import { readFileContents } from "./readmeStats.js";
 
 const pushReadMeUpdates = async () => {
     // Set up octokit and baseRequest
