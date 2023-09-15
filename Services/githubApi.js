@@ -7,7 +7,7 @@ import { log } from './log.js';
  * @param {string} accessToken The GitHub Personal Access Token
  * @returns an authenticated octokit used to access GitHub's API
  */
-const getOctokit = (accessToken) => {
+export const getOctokit = (accessToken) => {
     // Configure octokit using the accessToken
     const octokit = new Octokit({ auth: accessToken });
     return octokit;

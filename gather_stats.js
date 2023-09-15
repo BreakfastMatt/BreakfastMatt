@@ -6,7 +6,7 @@ import {
   fetchRepositoryDetailsAsync
 } from './Services/githubApi.js';
 import { logAndReturn } from './Services/log.js';
-import updateReadmeFile from './Services/readmeStats.js';
+import { updateReadmeFile } from './Services/readmeStats.js';
 
 /**
  * Fetch various repository statistics for the specified user
