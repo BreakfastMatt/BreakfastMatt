@@ -1,0 +1,6 @@
+# 📊 My GitHub Stats
+
+- Total Commits: **{{TOTAL_COMMITS}}**
+- Repositories Contributed To: **{{CONTRIBUTED_REPOS}}**
+- Lines of Code Added: <span style="color:green">{{LINES_ADDED}}</span>
+- Lines of Code Deleted: <span style="color:red">{{LINES_DELETED}}</span>

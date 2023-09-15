@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
-    "@octokit/rest": "18.12.0"
+    "@octokit/rest": "18.12.0",
+    "fs": "0.0.1-security"
   }
 }

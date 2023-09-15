@@ -1,9 +1,6 @@
+# 📊 My GitHub Stats
 
-# My GitHub Stats (generated using a custom GitHub action - likely inaccurate still)
-
-Total Commits: 45
-
-Lines Added: 36180
-
-Lines Deleted: 252
-    
+- Total Commits: **1200**
+- Repositories Contributed To: **20**
+- Lines of Code Added: <span style="color:green">25000</span>
+- Lines of Code Deleted: <span style="color:red">18000</span>

@@ -4,6 +4,7 @@ import {
   fetchUserRepositoriesAsync,
   fetchRepositoryStatisticsAsync
 } from './Services/githubApi.js';
+import updateReadmeFile from './Services/readmeStats.js';
 
 /**
  * Fetch various repository statistics for the specified user
@@ -19,6 +20,15 @@ const gatherStatsForUserAsync = async () => {
     // Fetch the repository statistics
     const username = "BreakfastMatt";
     const repositoryStatistics = await fetchRepositoryStatisticsAsync(accessToken, username, repositoryList);
+
+    // Update ReadMe file with calculated statistics
+    const statistics = { // TODO: temporary
+      totalCommits: 1200,
+      contributedRepoCount: 20,
+      linesAdded: 25000,
+      linesDeleted: 18000
+    };
+    updateReadmeFile(statistics);
 
     // const repositoryDetails = await fetchRepositoryDetails();
     // const userStatistics = collateFinalUserStatistics(repositoryDetails);
