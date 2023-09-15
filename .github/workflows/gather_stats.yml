@@ -1,6 +1,7 @@
 name: Gather Repository Stats and Test Workflow
 
 on:
+  workflow_dispatch: # This is the manual invocation event
   schedule:
     - cron: '0 */6 * * *'  # Run every 6 hours
 
