@@ -1,10 +1,11 @@
 // Imports
+import collateRepositoryStatistics from './Services/collateUserStatistics.js';
 import getAccessToken from './Services/getAccessToken.js';
 import {
   fetchUserRepositoriesAsync,
-  fetchRepositoryStatisticsAsync as fetchRepositoryDetailsAsync
+  fetchRepositoryDetailsAsync
 } from './Services/githubApi.js';
-import { consoleLog, log, logAndReturn } from './Services/log.js';
+import { logAndReturn } from './Services/log.js';
 import updateReadmeFile from './Services/readmeStats.js';
 
 /**
@@ -20,10 +21,15 @@ const gatherStatsForUserAsync = async () => {
 
     // Fetch the repository statistics
     const username = "BreakfastMatt";
-    const repositoryStatistics = await fetchRepositoryDetailsAsync(accessToken, username, repositoryList);
+    const repositoryDetails = await fetchRepositoryDetailsAsync(accessToken, username, repositoryList);
+
+    // Collate the repository statistics
+    const repositoryStatistics = collateRepositoryStatistics(repositoryDetails);
 
     // Update ReadMe file with calculated statistics
     updateReadmeFile(repositoryStatistics);
+
+    // Success state
     return logAndReturn(repositoryStatistics, "Final statistics: \n", true);
   } catch (error) {
     console.error("Error:", error);
