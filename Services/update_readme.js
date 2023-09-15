@@ -4,31 +4,30 @@ import { getOctokit } from "./githubApi.js";
 import { readFileContents } from "./readmeStats.js";
 
 const pushReadMeUpdates = async () => {
-    // Set up octokit and baseRequest
-    console.log("Started")
-    const accessToken = getAccessToken();
+    // Set up octokit
+    console.log("Updating README file...\n")
     const username = "BreakfastMatt";
+    const path = "README.md";
+    const accessToken = getAccessToken();
     const octokit = getOctokit(accessToken);
-    const baseRequest = { owner: username, repo: username, path: 'README.md' };
 
-    // Get current README.md file content
-    const currentFileContent = await octokit.repos.getContent({ ...baseRequest, ref: 'main' })
-    const currentFileContentBase64 = Buffer.from(currentFileContent.data.content).toString('base64');
-    console.log(currentFileContentBase64.sha);
+    // Get current file data
+    const { data: currentFileData } = await octokit.repos.getContent({ owner: username, repo: username, path });
 
-    // Get updated README.md file content
-    const updatedFileContent = readFileContents('README.md');
-    const updatedFileContentBase64 = Buffer.from(updatedFileContent).toString('base64');
+    // Get the updated README file content
+    const updatedReadmeContent = readFileContents('README.md');
+    const updateFileContentBase64 = Buffer.from(updatedReadmeContent).toString('base64');
 
-    // Push update file
-    const status = await octokit.repos.createOrUpdateFileContents({
-        ...baseRequest, // Base request details
-        message: 'ACTION - Update README stats', // Commit message
-        branch: 'main', // Branch to run against
-        sha: currentFileContentBase64.sha, // Current file sha
-        content: updatedFileContentBase64, // Updated file contents
+    // Update the README.md file with the new content
+    await octokit.repos.createOrUpdateFileContents({
+        owner: username,
+        repo: username,
+        path,
+        message: 'Action - Update README.md with stats', // Commit message
+        content: updateFileContentBase64, // Updated README file contents
+        sha: currentFileData.sha // Current README file sha
     });
-    console.log("Readme file updated", status);
+    console.log("README.md updated successfully.");
 };
 
 // Run and handle errors
