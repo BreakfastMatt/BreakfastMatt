@@ -1,4 +1,4 @@
-# 📊 My GitHub Stats
+## 📊 My GitHub Stats
 
 [![Total Commits](https://img.shields.io/badge/Commits-278-yellow)](#)
 [![Contributed Repos](https://img.shields.io/badge/Contributed%20Repos-30-blue)](#)

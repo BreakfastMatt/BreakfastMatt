@@ -1,6 +1,7 @@
-# 📊 My GitHub Stats
+## 📊 My GitHub Stats
 
 [![Total Commits](https://img.shields.io/badge/Commits-{{TOTAL_COMMITS}}-yellow)](#)
+
 [![Contributed Repos](https://img.shields.io/badge/Contributed%20Repos-{{CONTRIBUTED_REPOS}}-blue)](#)
 [![Lines Added](https://img.shields.io/badge/Lines%20Added-{{LINES_ADDED}}-brightgreen)](#)
 [![Lines Deleted](https://img.shields.io/badge/Lines%20Deleted-{{LINES_DELETED}}-red)](#)
