@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -24,3 +24,11 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: node gather_stats.js
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name 'GitHub Action'
+          git config user.email 'action@github.com'
+          git add readme.md
+          git commit -m 'Update README with data'
+          git push
