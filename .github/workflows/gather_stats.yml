@@ -1,6 +1,7 @@
 name: Gather Repository Stats and Test Workflow
 
 on:
+  workflow_dispatch: # This is the manual invocation event
   schedule:
     - cron: '0 */6 * * *'  # Run every 6 hours
 
@@ -29,6 +30,6 @@ jobs:
         run: |
           git config user.name 'GitHub Action'
           git config user.email 'action@github.com'
-          git add readme.md
+          git add README.md
           git commit -m 'Update README with data'
           git push
