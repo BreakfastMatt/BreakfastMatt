@@ -13,14 +13,15 @@ const pushReadMeUpdates = async () => {
 
     // Get current README.md file content
     const currentFileContent = await octokit.repos.getContent({ ...baseRequest, ref: 'main' })
-    const currentFileContentBase64 = Buffer.from(currentFileContent.data.content, 'base64').toString('utf-8');
+    const currentFileContentBase64 = Buffer.from(currentFileContent.data.content).toString('base64');
+    console.log(currentFileContentBase64.sha);
 
     // Get updated README.md file content
     const updatedFileContent = readFileContents('README.md');
     const updatedFileContentBase64 = Buffer.from(updatedFileContent).toString('base64');
 
     // Push update file
-    await octokit.repos.createOrUpdateFileContents({
+    const status = await octokit.repos.createOrUpdateFileContents({
         ...baseRequest, // Base request details
         message: 'ACTION - Update README stats', // Commit message
         branch: 'main', // Branch to run against
