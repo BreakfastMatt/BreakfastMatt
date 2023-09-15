@@ -1,5 +1,6 @@
 // Imports
 import { localAccessToken } from '../config.js';
+import { consoleLog } from './log.js';
 
 /**
  * Fetches the GitHub access token from the appropriate source 
@@ -9,7 +10,7 @@ import { localAccessToken } from '../config.js';
 const getAccessToken = () => {
     // Pull the access token from the correct source (GitHub secrets or )
     const accessToken = process.env.ACCESS_TOKEN ?? localAccessToken;
-    if (!accessToken) console.log(`GitHub access token is not defined.`);
+    if (!accessToken) consoleLog(`GitHub access token is not defined.`);
     return accessToken;
 };
 
